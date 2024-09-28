@@ -39,7 +39,7 @@
 
     - name: Копируем docker-compose.yml на сервер
       copy:
-        src: docker-compose.yml
+        src: ./docker-compose.yml
         dest: /root/docker-compose.yml
 
     - name: Создаем директорию для конфиг фаила Nginx
@@ -54,7 +54,7 @@
       template:
         src: ./templates/nginx.conf
         dest: /etc/nginx/sites-available/default
-        notify: Restart docker-compose
+      notify: Restart docker-compose
 
     - name: Запускаем docker контейнер с использованием docker-compose
       command: docker-compose up -d
@@ -64,5 +64,5 @@
   handlers:
     - name: Restart docker-compose
       service:
-        name: docker-compose
+        name: nginx
         state: restarted
