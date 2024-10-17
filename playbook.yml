@@ -44,7 +44,7 @@
 
     - name: Создаем директорию для конфиг фаила Nginx
       file:
-        path: /etc/nginx/sites-available/default
+        path: /etc/nginx/
         state: directory
         owner: www-data
         group: www-data
@@ -53,7 +53,7 @@
     - name: Копируем Nginx конфигурацию из директории template
       template:
         src: ./templates/nginx.conf
-        dest: /etc/nginx/sites-available/default
+        dest: /etc/nginx/nginx.conf
       notify: Restart docker-compose
 
     - name: Запускаем docker контейнер с использованием docker-compose
